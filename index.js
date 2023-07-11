@@ -7,7 +7,7 @@ app.get('/', async (req, res) => {
   try {
     const userId = '1';
     const userData = await getUserData(userId);
-    res.send(`User data: ${userData}`);
+    res.send(`User data: ` + JSON.stringify(userData));
   } catch (error) {
     res.status(500).send('Failed to fetch user data');
   }

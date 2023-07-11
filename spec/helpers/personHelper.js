@@ -26,3 +26,5 @@ beforeEach(function () {
     },
   });
 });
+
+// "spec/voteSpec.js"
