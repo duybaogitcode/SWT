@@ -1,33 +1,35 @@
-const Person = require('../../lib/jasmine_examples/Person');
+const Account = require('../../lib/jasmine_examples/Account');
 
-describe('Person', function () {
-  let person;
+describe('Account', () => {
+  let account;
 
-  beforeEach(function () {
-    person = new Person();
+  beforeEach(() => {
+    account = new Account('duy bao', 'Password123', 'duybao@gmail.com');
   });
 
-  it('should be eligible to vote', function () {
-    person.name = 'John';
-    person.age = 20;
-    person.nationality = 'UK';
-    // expect(person.age >= 18 && person.nationality).toBe(true);
-    expect(person).toBeEligibleToVote();
+  it('should return valid status for name, password, and email', () => {
+    const result = account.checkAccountValidity();
+
+    expect(result.name.valid).toBe(true);
+    expect(result.name.message).toBe('oke name');
+    expect(result.password.valid).toBe(true);
+    expect(result.password.message).toBe('oke password');
+    expect(result.email.valid).toBe(true);
+    expect(result.email.message).toBe('oke email');
   });
 
-  it('should be underage', function () {
-    person.name = 'Jane';
-    person.age = 15;
-    person.nationality = 'UK';
-    // expect(person.age < 18 || !person.nationality).toBe(true);
-    expect(person).not.toBeEligibleToVote();
-  });
+  it('should return invalid status for name, password, and email', () => {
+    account.username = 'bao';
+    account.password = 'password';
+    account.email = 'bao123email';
 
-  it('should have no nationality', function () {
-    person.name = 'Adam';
-    person.age = 25;
-    person.nationality = null;
-    // expect(person.nationality).toBe(null);
-    expect(person).not.toBeEligibleToVote();
+    const result = account.checkAccountValidity();
+
+    expect(result.name.valid).toBe(false);
+    expect(result.name.message).toBe('Name not valid');
+    expect(result.password.valid).toBe(false);
+    expect(result.password.message).toBe('Password not valid');
+    expect(result.email.valid).toBe(false);
+    expect(result.email.message).toBe('Email not valid');
   });
 });

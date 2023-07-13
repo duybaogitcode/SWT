@@ -1,6 +1,6 @@
 {
   "spec_dir": "spec",
-  "spec_files": ["test/userSpec.js"],
+  "spec_files": ["test/voteSpec.js"],
   "helpers": ["helpers/**/*.?(m)js"],
   "env": {
     "stopSpecOnExpectationFailure": false,
